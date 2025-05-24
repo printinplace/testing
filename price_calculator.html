@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Price Calculator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f7f9fc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background-color: #ffffff;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: 600;
+      color: #444;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+      font-size: 15px;
+    }
+    button {
+      margin-top: 25px;
+      padding: 12px;
+      width: 100%;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #result {
+      margin-top: 25px;
+      font-size: 18px;
+      font-weight: 500;
+      text-align: center;
+      color: #222;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Price Calculator</h2>
+    <label for="name">Name</label>
+    <input type="text" id="name" placeholder="Enter your name">
+
+    <label for="banner">Banner</label>
+    <input type="text" id="banner" placeholder="Banner name or ID">
+
+    <label for="width">Width (inches)</label>
+    <input type="number" id="width" step="0.01" placeholder="Enter width in inches">
+
+    <label for="height">Height (inches)</label>
+    <input type="number" id="height" step="0.01" placeholder="Enter height in inches">
+
+    <button onclick="calculatePrice()">Calculate Price</button>
+
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function calculatePrice() {
+      const width = parseFloat(document.getElementById('width').value);
+      const height = parseFloat(document.getElementById('height').value);
+
+      if (isNaN(width) || isNaN(height) || width <= 0 || height <= 0) {
+        document.getElementById('result').textContent = 'Please enter valid width and height.';
+        return;
+      }
+
+      const sqft = (width * height) / 144;
+      let price = 0;
+
+      if (sqft < 5) {
+        price = 35;
+      } else if (sqft <= 10) {
+        price = sqft * 5;
+      } else {
+        price = sqft * 5;
+      }
+
+      document.getElementById('result').textContent = `Estimated Price: $${price.toFixed(2)} (Area: ${sqft.toFixed(2)} sqft)`;
+    }
+  </script>
+</body>
+</html>
